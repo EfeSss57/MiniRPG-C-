@@ -1,0 +1,53 @@
+using Microsoft.VisualBasic;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _3._11._25
+{
+    internal class Karakter
+    {
+        public int Id { get; set; }
+        public string Ad { get; set; }
+        public int Can { get; set; }
+        public int Guc { get; set; }
+        public int Seviye { get; set; } = 1;
+        public int SavasSayisi { get; set; } = 0;
+        public int KaybedilenRound { get; set; } = 0;
+        public int KazanilanRound { get; set; } = 0;
+        Random rnd = new Random();
+        public void Saldir(Karakter hedef)
+        {
+
+                int hasar = rnd.Next(Guc / 2, Guc + 1);
+                hedef.Can -= hasar;
+                Console.WriteLine($"{this.Ad} adlı karakter, {hedef.Ad} adlı karaktere {hasar} hasar verdi! {hedef.Ad} adlı karakterin kalan canı: {hedef.Can}");
+                this.SavasSayisi++;
+                hedef.KaybedilenRound++;
+                this.KazanilanRound++;
+
+                if (hedef.Can <=0)
+                {
+                    Seviye++;
+                    Console.WriteLine($"{this.Ad} adlı karakter {hedef.Ad} adlı karakteri elediği için seviye atladın şuanki seviyen:{this.Seviye}");
+                    Console.WriteLine($"{hedef.Ad} adlı karakter 0 can'a düştüğü için elendi!");
+            }
+        }
+        public void BilgiYazdir()
+        {
+            Console.WriteLine("***********");
+            Console.WriteLine($"İd: {this.Id}");
+            Console.WriteLine($"Adı: {this.Ad}");
+            Console.WriteLine($"Can: {this.Can}");
+            Console.WriteLine($"Güç: {this.Guc}");
+            Console.WriteLine($"Seviye: {this.Seviye}");
+            Console.WriteLine($"Oynanan Round:{this.SavasSayisi}-Kazanılan Round: {this.KazanilanRound}-Kaybedilen Round: {this.KaybedilenRound}");
+   
+        }
+
+
+    }
+}
